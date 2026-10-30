@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="avs-tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0EA5E9"/>
+      <stop offset="1" stop-color="#1E3A8A"/>
+    </linearGradient>
+    <linearGradient id="avs-bolt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FDE047"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="url(#avs-tile)"/>
+  <g transform="translate(256 256) scale(.62) translate(-293 -256) skewX(-10)">
+    <g fill="#fff">
+      <path fill-rule="evenodd" d="M0 392 L96 120 H140 L236 392 H176 L118 222 L60 392 Z"/>
+      <path d="M250 120 H310 L356 290 L402 120 H462 L382 392 H330 Z"/>
+    </g>
+    <path d="M660 147 H565 a54.5 54.5 0 0 0 0 109 H595 a54.5 54.5 0 0 1 0 109 H500" fill="none" stroke="#fff" stroke-width="54"/>
+    <path d="M14 334 L112 280 L104 314 L206 266" fill="none" stroke="#0B1B3F" stroke-width="40" stroke-linejoin="miter" stroke-miterlimit="10"/>
+    <path d="M14 334 L112 280 L104 314 L206 266" fill="none" stroke="url(#avs-bolt)" stroke-width="27" stroke-linejoin="miter" stroke-miterlimit="10"/>
+  </g>
+</svg>
