@@ -1,6 +1,6 @@
 # AVServices (AVS) website
 
-Plain HTML, CSS and JS. No build step. On Vercel: Framework = "Other", no build command.
+Custom-developed by Aditya Kadam using HTML, CSS and JavaScript; no website template was used (developer confirmation). No build step. On Vercel: Framework = "Other", no build command.
 
 ## Pages
 | Page | File | Accent colour |
@@ -32,8 +32,8 @@ Yellow-highlighted text on the site marks a placeholder.
 
 ## Photos (`assets/img/`)
 - All photos are WebP (much smaller than JPG). Banner photos also have a `-sm.webp` phone-size version.
-- `solar-*`: from the earlier solar site's template.
-- `ins-*`, `sea-*`, `dig-*`, `team-*`, `wind-*`: free photos from Unsplash (unsplash.com/license: free for business use, no credit required).
+- Photo sourcing: the owner confirms the photos were found through Google Images. Google Images is a discovery service, not a photo licence.
+- Original photo sources and commercial-use permissions have not yet been documented. No Unsplash licensing claim is made for these files. Verify rights individually or replace with documented licensed or owner-created photos.
 - To swap in your own photo, send it over and it will be converted to WebP with the same name.
 
 ## Forms
