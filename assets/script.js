@@ -33,7 +33,7 @@ document.querySelectorAll('[data-wa]').forEach(el => {
   const text = el.dataset.wa || 'Hello AVServices, I would like to know more.';
   el.href = SITE.whatsapp
     ? `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`
-    : 'contact.html';
+    : '/contact';
 });
 
 /* Year in footer */
