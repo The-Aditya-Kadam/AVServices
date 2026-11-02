@@ -23,12 +23,11 @@ Shared files: `assets/style.css`, `assets/script.js`, `assets/img/` (photos), `s
 - `assets/logo.svg` is the old blue AVS tile. It's no longer used and can be deleted.
 - **Share previews need the live web address** in every page's `og:image` tag. Send it when the domain is ready.
 
-## Add your real details
-1. **Phone, WhatsApp, email, address:** edit the `SITE` block at the top of `assets/script.js`. Every page updates from there.
-2. **Insurance licence:** search for `[authorised agent / POSP` in `insurance.html` and in the footer of every page, and replace it with the real registration details.
-3. **About page story:** search for `Add your own story here` in `about.html`.
-
-Yellow-highlighted text on the site marks a placeholder.
+## Confirmed business information
+- Shashikant Kadam, CEO; Mumbai; +91 97686 20556.
+- Business email and WhatsApp Business activation are not confirmed. No placeholder destination is published.
+- To change business details, update both static page content/JSON-LD and the `SITE` block in `assets/script.js`.
+- Insurance authorisation, insurer relationships, service coverage and genuine project evidence still need owner confirmation. No credentials should be invented.
 
 ## Photos (`assets/img/`)
 - All photos are WebP (much smaller than JPG). Banner photos also have a `-sm.webp` phone-size version.
@@ -36,13 +35,15 @@ Yellow-highlighted text on the site marks a placeholder.
 - Original photo sources and commercial-use permissions have not yet been documented. No Unsplash licensing claim is made for these files. Verify rights individually or replace with documented licensed or owner-created photos.
 - To swap in your own photo, send it over and it will be converted to WebP with the same name.
 
-## Forms
-Forms open WhatsApp or the email app with the message filled in. No server or form service is needed.
+## Forms and enquiry handling
+The Contact and Seafood forms prepare an enquiry summary locally. They do not submit to a server, send a message, store contact details or establish a received lead. A separate copy action uses the clipboard when available; manual copying is supported when clipboard access fails. Call links use the confirmed phone number.
+
+A future delivery endpoint, business email/WhatsApp setup, privacy decisions and explicit channel integration are needed before enabling online submission or lead-receipt analytics. See `docs/seo-framework.md`.
 
 ## Speed, SEO and caching
-- Lighthouse (mobile, local test): Accessibility 100, Best Practices 100, SEO 100 on every page; Performance 87–94 before Vercel's compression.
+- No current Lighthouse or field Core Web Vitals score is claimed. Measure the deployed site before publishing performance results.
 - `vercel.json` sets browser caching. CSS and JS links carry a `?v=` version, so updates show straight away.
-- `robots.txt` allows all search engines. Add a `sitemap.xml` once the domain is known.
+- `robots.txt` references the current seven-page sitemap. Canonicals use https://avsinfo.in; Vercel redirects www to the apex host and .html URLs to clean URLs.
 
 ## Upload
 Upload everything in this folder to GitHub, keeping the folders as they are:

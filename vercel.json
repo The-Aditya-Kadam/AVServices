@@ -29,5 +29,18 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.avsinfo.in"
+        }
+      ],
+      "destination": "https://avsinfo.in/:path*",
+      "permanent": true
+    }
   ]
 }

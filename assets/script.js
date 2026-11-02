@@ -7,11 +7,11 @@
    --------------------------------------------------------------- */
 const SITE = {
   name: 'AVServices',
-  phone: '+91 XXXXX XXXXX',        // shown on the site
-  phoneLink: '',                   // digits for tel: link, e.g. +919876543210
+  phone: '+91 97686 20556',        // shown on the site
+  phoneLink: '+919768620556',                   // digits for tel: link, e.g. +919876543210
   whatsapp: '',                    // digits only, e.g. 919876543210
-  email: 'your-email@example.com',
-  address: 'Office address to be added'
+  email: '',
+  address: 'Mumbai'
 };
 
 document.documentElement.classList.remove('no-js');
@@ -72,45 +72,49 @@ if ('IntersectionObserver' in window) {
   revealEls.forEach(el => el.classList.add('in'));
 }
 
-/* Enquiry forms: open WhatsApp or email with the message filled in.
-   No server needed. */
-document.querySelectorAll('form[data-enquiry]').forEach(form => {
+/* Enquiry summaries are local only: no storage, server submission or lead claim. */
+document.querySelectorAll('form[data-enquiry]').forEach((form, index) => {
   const msg = form.querySelector('.form-msg');
-  const say = t => { if (msg) msg.textContent = t; };
-
-  // Preselect service from ?service=solar etc.
-  const svc = new URLSearchParams(location.search).get('service');
+  const say = text => { if (msg) msg.textContent = text; };
   const sel = form.querySelector('select[name="service"]');
-  if (svc && sel) {
-    const opt = [...sel.options].find(o => o.dataset.key === svc);
-    if (opt) sel.value = opt.value;
-  }
-
+  const service = new URLSearchParams(location.search).get('service');
+  const option = sel && [...sel.options].find(item => item.dataset.key === service);
+  if (option) sel.value = option.value;
+  const preview = form.querySelector('.enquiry-preview');
+  const output = form.querySelector('[data-enquiry-summary]');
+  if (output) output.id = 'enquiry-summary-' + index;
   const build = () => {
-    const lines = [`Hello ${SITE.name}, I'd like to make an enquiry.`, ''];
-    form.querySelectorAll('input, select, textarea').forEach(f => {
-      if (!f.name || !f.value.trim()) return;
-      const label = form.querySelector(`label[for="${f.id}"]`);
-      lines.push(`${label ? label.textContent.replace('*', '').trim() : f.name}: ${f.value.trim()}`);
+    const lines = [`Hello ${SITE.name}, I would like to discuss an enquiry.`, ''];
+    form.querySelectorAll('input, select, textarea[name]').forEach(field => {
+      if (!field.name || !field.value.trim()) return;
+      const label = field.labels && field.labels[0];
+      lines.push(`${label ? label.textContent.replace('*', '').trim() : field.name}: ${field.value.trim()}`);
     });
     return lines.join('\n');
   };
-
-  form.querySelectorAll('[data-send]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (!form.reportValidity()) return;
-      const text = build();
-      if (btn.dataset.send === 'whatsapp') {
-        if (!SITE.whatsapp) { say('WhatsApp number is not added yet. Please use email for now.'); return; }
-        window.open(`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
-      } else {
-        const subject = `Website enquiry – ${sel ? sel.value : SITE.name}`;
-        location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
-      }
-      say('Thank you! Your message is ready to send in the app that just opened.');
-    });
+  const prepare = form.querySelector('[data-send="prepare"]');
+  if (prepare) prepare.addEventListener('click', () => {
+    if (!form.reportValidity()) return;
+    output.value = build();
+    preview.hidden = false;
+    say('Summary prepared on this device. It has not been sent. Call AVServices to discuss your enquiry.');
+    output.focus();
   });
-  form.addEventListener('submit', e => e.preventDefault());
+  const copy = form.querySelector('[data-copy-summary]');
+  if (copy) copy.addEventListener('click', async () => {
+    // Always rebuild so edits cannot leave a stale summary in the clipboard.
+    if (!form.reportValidity()) return;
+    output.value = build();
+    try {
+      if (!navigator.clipboard) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(output.value);
+      say('Summary copied. Nothing has been sent to AVServices.');
+    } catch (_) {
+      output.focus(); output.select();
+      say('Copy is unavailable. Select and copy the summary manually. Nothing has been sent.');
+    }
+  });
+  form.addEventListener('submit', event => event.preventDefault());
 });
 
 /* Solar savings calculator (solar page only) */
